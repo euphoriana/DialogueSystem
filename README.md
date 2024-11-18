@@ -1,4 +1,10 @@
 ### cyh直接在vscode跑的指令教程
+### 1.先按照“src/main/resources/application.yml”中的配置起一个mysql数据库，建一个user表，包含nickname和password两个字段
+### CREATE TABLE user (
+###   id INT PRIMARY KEY,
+###    nickname VARCHAR(255),
+###    password VARCHAR(255)
+### );
 ### 先 mvn -v 看maven安装好没，然后执行以下：
 ### mvn clean install
 ### mvn spring-boot:run
