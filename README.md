@@ -1,4 +1,4 @@
-### 直接在vscode跑的指令教程
+### cyh直接在vscode跑的指令教程
 ### 先 mvn -v 看maven安装好没，然后执行以下：
 ### mvn clean install
 ### mvn spring-boot:run
