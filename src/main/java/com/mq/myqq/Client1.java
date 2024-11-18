@@ -43,7 +43,7 @@ public class Client1 {
         startClient();
     }
 
-    public static void startClient(){
+    public static void startClient() {
         frame = new JFrame("MyQQ");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
@@ -242,9 +242,9 @@ public class Client1 {
             updateClientList(message);
         } else if (message.startsWith("/grouplist")) {
             updateGroupList(message);
-        } else if(message.startsWith("/file")){
+        } else if (message.startsWith("/file")) {
             handleFileTransferCommand(message);
-        }else {
+        } else {
             sendMessageToChatRoom(message);
         }
     }
@@ -276,7 +276,7 @@ public class Client1 {
     private static void sendMessageToChatRoom(String message) {
         // 解析消息格式 "chatRoomName context"
         String[] parts = message.split(" ", 2);
-        String chatRoomName = parts[0].substring(1,parts[0].length() - 1); // 去除chatRoomName前的 '['
+        String chatRoomName = parts[0].substring(1, parts[0].length() - 1); // 去除chatRoomName前的 '['
         String context = parts[1];
         // 在对应的聊天室窗口中显示消息
         SwingUtilities.invokeLater(() -> {
@@ -315,13 +315,13 @@ public class Client1 {
 
         DefaultListModel<String> groupListModel2 = new DefaultListModel<>();
         for (int i = 0; i < groupListModel.getSize(); i++) {
-            groupListModel2.add(i,  groupListModel.get(i));
+            groupListModel2.add(i, groupListModel.get(i));
         }
         groupListModel2.add(0, "聊天室成员");
         for (int i = 0; i < groupListModel2.getSize(); i++) {
             if (groupListModel2.get(i).equals(clientName)) {
                 groupListModel2.remove(i);
-                groupListModel2.add(groupListModel.getSize(), "你：" + clientName );
+                groupListModel2.add(groupListModel.getSize(), "你：" + clientName);
             }
         }
         JList<String> groupList = new JList<>(groupListModel2);
@@ -336,7 +336,8 @@ public class Client1 {
         JTextArea groupMessageField = new JTextArea(5, 20); // 设置行数和列数，根据需要调整
         groupMessageField.setLineWrap(true);
         groupMessageField.setWrapStyleWord(true);
-        groupMessageField.addKeyListener(new KeyAdapter() {});
+        groupMessageField.addKeyListener(new KeyAdapter() {
+        });
 
         JButton groupSendButton = new JButton("Send");
         groupSendButton.addActionListener(new ActionListener() {
@@ -344,7 +345,7 @@ public class Client1 {
             public void actionPerformed(ActionEvent e) {
                 sendGroupMessage(groupName, groupMessageField.getText());
                 try {
-                    doc.insertString(doc.getLength(), " 我： "+groupMessageField.getText() + "\n", null);
+                    doc.insertString(doc.getLength(), " 我： " + groupMessageField.getText() + "\n", null);
                 } catch (BadLocationException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -360,7 +361,7 @@ public class Client1 {
 
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    sendFile(selectedFile.getAbsolutePath(), groupName,selectedFile.getName(), groupChatArea);
+                    sendFile(selectedFile.getAbsolutePath(), groupName, selectedFile.getName(), groupChatArea);
                 }
             }
         });
@@ -381,7 +382,7 @@ public class Client1 {
     private static void showImage(JTextPane pane, String filePath) {
         StyledDocument doc = pane.getStyledDocument();
         pane.setCaretPosition(doc.getLength());
-        System.out.println("-------------------"+filePath);
+        System.out.println("-------------------" + filePath);
         ImageIcon image = new ImageIcon(filePath);
         // 可能需要调整图片大小以适应窗口
         pane.insertIcon(image);
@@ -394,7 +395,7 @@ public class Client1 {
 
     private static void sendGroupMessage(String groupName, String message) {
         try {
-            writer.write("[" + groupName + "] " + " "+clientName+"："+message);
+            writer.write("[" + groupName + "] " + " " + clientName + "：" + message);
             writer.newLine();
             writer.flush();
         } catch (IOException e) {
@@ -437,7 +438,7 @@ public class Client1 {
                         } catch (BadLocationException e) {
                             throw new RuntimeException(e);
                         }
-                        sendGroupFile(groupName," " + clientName + "接收到文件：" + lastFileName);
+                        sendGroupFile(groupName, " " + clientName + "接收到文件：" + lastFileName);
                         flag = true;
                         byte[] fileBytes = Base64.getDecoder().decode(base64EncodedData);
                         saveFile(flag, groupChatArea, groupName, lastFileName, fileBytes);
@@ -453,16 +454,17 @@ public class Client1 {
         });
     }
 
-    private static void saveFile(boolean flag, JTextPane jTextPane, String groupName, String fileName, byte[] fileBytes) {
+    private static void saveFile(boolean flag, JTextPane jTextPane, String groupName, String fileName,
+            byte[] fileBytes) {
         String fileExtension = getFileExtension(fileName);
         if (flag && isImageFile(fileExtension)) {
             // 如果图片文件已经传输完毕，显示图片
             showImage(jTextPane, "./src/main/resources/file/" + groupName + "_" + clientName + "_" + fileName);
-        }
-        else {
+        } else {
             // 保存文件到本地，可以根据需要修改保存的路径
             String savePath = "./src/main/resources/file/" + groupName + "_" + clientName + "_" + fileName;
-            try (BufferedOutputStream fileOutputStream = new BufferedOutputStream(new FileOutputStream(savePath,true))) {
+            try (BufferedOutputStream fileOutputStream = new BufferedOutputStream(
+                    new FileOutputStream(savePath, true))) {
                 fileOutputStream.write(fileBytes);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -476,7 +478,7 @@ public class Client1 {
             int bytesRead;
             StyledDocument doc = chatRoomArea.getStyledDocument();
             doc.insertString(doc.getLength(), " 我发送了文件：" + filename + "\n", null);
-            sendGroupFile(groupName,clientName + " 发送了文件：" + filename);
+            sendGroupFile(groupName, clientName + " 发送了文件：" + filename);
             String fileExtension = getFileExtension(filename);
             if (isImageFile(fileExtension)) {
                 // 如果是图片文件，显示图片
@@ -484,11 +486,11 @@ public class Client1 {
             }
             while ((bytesRead = fileInputStream.read(buffer)) != -1) {
                 // 发送文件内容到服务器
-                sendFileBytes(groupName, buffer, bytesRead,filename);
+                sendFileBytes(groupName, buffer, bytesRead, filename);
             }
             // 文件发送完后再发送一个结束标志位
             buffer = ("EndOfFile").getBytes();
-            sendFileBytes(groupName, buffer, buffer.length,"thelastone" + filename);
+            sendFileBytes(groupName, buffer, buffer.length, "thelastone" + filename);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (BadLocationException e) {
@@ -512,7 +514,8 @@ public class Client1 {
     private static void sendFileBytes(String groupName, byte[] buffer, int bytesRead, String filename) {
         byte[] actualData = Arrays.copyOf(buffer, bytesRead);
         // 将文件内容发送到服务器，格式："/file groupName fileName bytesRead base64EncodedData"
-        String message = "/file " + groupName + " " + filename + " " + bytesRead + " " + Base64.getEncoder().encodeToString(actualData);
+        String message = "/file " + groupName + " " + filename + " " + bytesRead + " "
+                + Base64.getEncoder().encodeToString(actualData);
         sendMessage(message);
     }
 
