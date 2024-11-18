@@ -1,3 +1,10 @@
+### 直接在vscode跑的指令教程
+### 先 mvn -v 看maven安装好没，然后执行以下：
+### mvn clean install
+### mvn spring-boot:run
+### mvn compile exec:java
+### java -cp "target/classes;target/dependency/*"com.mq.myqq.Client
+
 ### 使用流程：
 ### 1.先按照“src/main/resources/application.yml”中的配置起一个mysql数据库，建一个user表，包含nickname和password两个字段
 ### 2.run "src/main/java/com/mq/myqq/Server.java"
