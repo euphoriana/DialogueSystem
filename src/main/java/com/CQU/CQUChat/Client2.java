@@ -88,9 +88,9 @@ public class Client2 {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         buttonPanel.setBackground(new Color(240, 240, 255));
 
-        signupButton = new JButton("Sign Up");
+        signupButton = new JButton("注册");
         signupButton.setFont(new Font("Arial", Font.BOLD, 14));
-        loginButton = new JButton("Log In");
+        loginButton = new JButton("登录");
         loginButton.setFont(new Font("Arial", Font.BOLD, 14));
 
         buttonPanel.add(signupButton);
