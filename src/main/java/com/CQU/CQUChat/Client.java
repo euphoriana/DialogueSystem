@@ -472,7 +472,7 @@ public class Client {
                 String[] quickReplies = { "你好", "哦", "再见" };
                 String selectedReply = (String) JOptionPane.showInputDialog(
                         groupChatFrame,
-                        "Select a quick reply:",
+                        "选择快速回复:",
                         "快速回复",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
@@ -488,7 +488,7 @@ public class Client {
         JButton emojiButton = new JButton("表情");
         emojiButton.setBackground(new Color(255, 215, 0));
         emojiButton.setForeground(Color.WHITE);
-        emojiButton.setFont(new Font("Arial", Font.BOLD, 14));
+        emojiButton.setFont(new Font("SimSun", Font.BOLD, 14));
         emojiButton.setFocusPainted(false);
         emojiButton.setBorder(BorderFactory.createLineBorder(new Color(255, 215, 0)));
         emojiButton.addActionListener(new ActionListener() {
@@ -497,7 +497,7 @@ public class Client {
                 String[] emojis = { ":)", ":D", ":(", ":P" };
                 String selectedEmoji = (String) JOptionPane.showInputDialog(
                         groupChatFrame,
-                        "Select an emoji:",
+                        "选择一个表情:",
                         "表情",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
