@@ -1,4 +1,4 @@
-package com.mq.myqq;
+package com.CQU.CQUChat;
 
 import org.springframework.boot.SpringApplication;
 
@@ -13,7 +13,7 @@ public class Server {
     private static Map<String, List<String>> groupMembers = new HashMap<>();
 
     public static void main(String[] args) {
-        SpringApplication.run(MyQqApplication.class, args);
+        SpringApplication.run(CQUChatApplication.class, args);
         Server.startServer();
     }
 

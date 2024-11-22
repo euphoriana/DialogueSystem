@@ -9,7 +9,7 @@
 ### mvn clean install
 ### mvn spring-boot:run
 ### mvn compile exec:java
-### java -cp "target/classes;target/dependency/*"com.mq.myqq.Client
+### java -cp "target/classes;target/dependency/*"com.CQU.CQUChat.Client
 
 ### 使用流程：
 ### 1.先按照“src/main/resources/application.yml”中的配置起一个mysql数据库，建一个user表，包含nickname和password两个字段

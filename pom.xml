@@ -8,11 +8,11 @@
         <version>2.6.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.mq</groupId>
-    <artifactId>MyQQ</artifactId>
+    <groupId>com.CQU</groupId>
+    <artifactId>CQUChat</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>MyQQ</name>
-    <description>MyQQ</description>
+    <name>CQUChat</name>
+    <description>CQUChat</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -95,7 +95,7 @@
             <artifactId>exec-maven-plugin</artifactId>
             <version>3.1.0</version>
             <configuration>
-                <mainClass>com.mq.myqq.Server</mainClass>
+                <mainClass>com.CQU.CQUChat.Server</mainClass>
             </configuration>
         </plugin>
     </plugins>

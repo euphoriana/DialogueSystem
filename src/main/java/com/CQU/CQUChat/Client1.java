@@ -1,4 +1,4 @@
-package com.mq.myqq;
+package com.CQU.CQUChat;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
