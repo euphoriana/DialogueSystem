@@ -46,14 +46,14 @@ public class Client1 {
     }
 
     public static void startClient() {
-        frame = new JFrame("MyQQ");
+        frame = new JFrame("CQUChat");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
         frame.setLayout(new BorderLayout());
 
         // 标题
-        JLabel titleLabel = new JLabel("Welcome to MyQQ", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        JLabel titleLabel = new JLabel("欢迎来到CQUChat", JLabel.CENTER);
+        titleLabel.setFont(new Font("Simsun", Font.BOLD, 24));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         frame.add(titleLabel, BorderLayout.NORTH);
 
@@ -68,7 +68,7 @@ public class Client1 {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel("Username: "), gbc);
+        panel.add(new JLabel("用户名: "), gbc);
 
         gbc.gridx = 1;
         userTextField = new JTextField(20);
@@ -76,7 +76,7 @@ public class Client1 {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        panel.add(new JLabel("Password: "), gbc);
+        panel.add(new JLabel("密码: "), gbc);
 
         gbc.gridx = 1;
         passwordField = new JPasswordField(20);
@@ -88,10 +88,10 @@ public class Client1 {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         buttonPanel.setBackground(new Color(240, 240, 255));
 
-        signupButton = new JButton("Sign Up");
-        signupButton.setFont(new Font("Arial", Font.BOLD, 14));
-        loginButton = new JButton("Log In");
-        loginButton.setFont(new Font("Arial", Font.BOLD, 14));
+        signupButton = new JButton("注册");
+        signupButton.setFont(new Font("SimSun", Font.BOLD, 14));
+        loginButton = new JButton("登录");
+        loginButton.setFont(new Font("SimSun", Font.BOLD, 14));
 
         buttonPanel.add(signupButton);
         buttonPanel.add(loginButton);
@@ -121,7 +121,7 @@ public class Client1 {
                     try (CloseableHttpResponse response = client.execute(request)) {
                         SwingUtilities.invokeLater(() -> {
                             if (response.getEntity().getContentLength() != 0) {
-                                JOptionPane.showMessageDialog(frame, "Login Successful");
+                                JOptionPane.showMessageDialog(frame, "成功登录");
                                 frame.setVisible(false);
                                 try {
                                     openOnlineClientsWindow();
@@ -129,7 +129,7 @@ public class Client1 {
                                     throw new RuntimeException(ex);
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(frame, "Login Failed");
+                                JOptionPane.showMessageDialog(frame, "登陆失败");
                             }
                         });
                     }
@@ -157,7 +157,7 @@ public class Client1 {
                         String responseBody = EntityUtils.toString(response.getEntity());
                         SwingUtilities.invokeLater(() -> {
                             if (responseBody.equals("1")) {
-                                JOptionPane.showMessageDialog(frame, "Signup Successful");
+                                JOptionPane.showMessageDialog(frame, "成功注册");
                                 frame.setVisible(false);
                                 try {
                                     openOnlineClientsWindow();
@@ -165,7 +165,7 @@ public class Client1 {
                                     throw new RuntimeException(ex);
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(frame, "Signup Failed");
+                                JOptionPane.showMessageDialog(frame, "注册失败");
                             }
                         });
                     }
@@ -177,7 +177,7 @@ public class Client1 {
     }
 
     static void openOnlineClientsWindow() throws IOException {
-        frame = new JFrame("Online Lobby");
+        frame = new JFrame("在线聊天");
         frame.setSize(400, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -186,8 +186,8 @@ public class Client1 {
         mainPanel.setBackground(new Color(240, 248, 255)); // 柔和背景色
 
         // 标题
-        JLabel titleLabel = new JLabel("Online Users", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        JLabel titleLabel = new JLabel("在线用户", JLabel.CENTER);
+        titleLabel.setFont(new Font("SimSun", Font.BOLD, 24));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         titleLabel.setOpaque(true);
         titleLabel.setBackground(new Color(173, 216, 230)); // 淡蓝背景色
@@ -206,7 +206,7 @@ public class Client1 {
         JScrollPane clientListScrollPane = new JScrollPane(clientList);
         clientListScrollPane.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(new Color(173, 216, 230), 1),
-                "Users Online",
+                "在线用户",
                 0,
                 0,
                 new Font("SimSun", Font.BOLD, 14),
@@ -217,7 +217,7 @@ public class Client1 {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         buttonPanel.setBackground(new Color(240, 248, 255));
 
-        JButton closeButton = new JButton("Close");
+        JButton closeButton = new JButton("关闭");
         closeButton.setFont(new Font("SimSun", Font.BOLD, 14));
         closeButton.setBackground(new Color(173, 216, 230));
         closeButton.setForeground(Color.WHITE);
@@ -276,7 +276,7 @@ public class Client1 {
         if (!selectedClients.isEmpty()) {
             // Send the selectedClients list to the server and request a new group window
             StringBuilder createGroupCommand = new StringBuilder("/openChatRoom ");
-            String userInput = JOptionPane.showInputDialog("Enter ChatRoomName:");
+            String userInput = JOptionPane.showInputDialog("输入聊天室名称:");
             createGroupCommand.append(userInput).append(" ");
             for (String client : selectedClients) {
                 createGroupCommand.append(client).append(" ");
@@ -373,7 +373,7 @@ public class Client1 {
 
     private static void openGroupChatWindow(String groupName, DefaultListModel<String> groupListModel) {
         // 创建聊天窗口
-        JFrame groupChatFrame = new JFrame("Chat Room: " + groupName);
+        JFrame groupChatFrame = new JFrame("聊天室: " + groupName);
         groupChatFrame.setSize(600, 400); // 调整窗口高度以适应新按钮
         groupChatFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         groupChatFrame.setLocationRelativeTo(null);
@@ -415,10 +415,10 @@ public class Client1 {
         groupMessageField.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
 
         // 发送按钮
-        JButton groupSendButton = new JButton("Send");
+        JButton groupSendButton = new JButton("发送");
         groupSendButton.setBackground(new Color(70, 130, 180));
         groupSendButton.setForeground(Color.WHITE);
-        groupSendButton.setFont(new Font("Arial", Font.BOLD, 14));
+        groupSendButton.setFont(new Font("SimSun", Font.BOLD, 14));
         groupSendButton.setFocusPainted(false);
         groupSendButton.setBorder(BorderFactory.createLineBorder(new Color(70, 130, 180)));
         groupSendButton.addActionListener(new ActionListener() {
@@ -440,10 +440,10 @@ public class Client1 {
         });
 
         // 发送文件按钮
-        JButton sendFileButton = new JButton("Send File");
+        JButton sendFileButton = new JButton("发送");
         sendFileButton.setBackground(new Color(34, 139, 34));
         sendFileButton.setForeground(Color.WHITE);
-        sendFileButton.setFont(new Font("Arial", Font.BOLD, 14));
+        sendFileButton.setFont(new Font("SimSun", Font.BOLD, 14));
         sendFileButton.setFocusPainted(false);
         sendFileButton.setBorder(BorderFactory.createLineBorder(new Color(34, 139, 34)));
         sendFileButton.addActionListener(new ActionListener() {
@@ -460,20 +460,20 @@ public class Client1 {
         });
 
         // 快捷回复按钮
-        JButton quickReplyButton = new JButton("Quick Reply");
+        JButton quickReplyButton = new JButton("快速回复");
         quickReplyButton.setBackground(new Color(255, 165, 0));
         quickReplyButton.setForeground(Color.WHITE);
-        quickReplyButton.setFont(new Font("Arial", Font.BOLD, 14));
+        quickReplyButton.setFont(new Font("SimSun", Font.BOLD, 14));
         quickReplyButton.setFocusPainted(false);
         quickReplyButton.setBorder(BorderFactory.createLineBorder(new Color(255, 165, 0)));
         quickReplyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] quickReplies = { "Hello", "How are you?", "Goodbye" };
+                String[] quickReplies = { "你好", "哦", "再见" };
                 String selectedReply = (String) JOptionPane.showInputDialog(
                         groupChatFrame,
                         "Select a quick reply:",
-                        "Quick Reply",
+                        "快速回复",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
                         quickReplies,
@@ -485,7 +485,7 @@ public class Client1 {
         });
 
         // 表情按钮
-        JButton emojiButton = new JButton("Emoji");
+        JButton emojiButton = new JButton("表情");
         emojiButton.setBackground(new Color(255, 215, 0));
         emojiButton.setForeground(Color.WHITE);
         emojiButton.setFont(new Font("Arial", Font.BOLD, 14));
@@ -498,7 +498,7 @@ public class Client1 {
                 String selectedEmoji = (String) JOptionPane.showInputDialog(
                         groupChatFrame,
                         "Select an emoji:",
-                        "Emoji",
+                        "表情",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
                         emojis,
