@@ -1,4 +1,4 @@
-package com.mq.myqq;
+package com.CQU.CQUChat;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -20,7 +20,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 
-public class Client1 {
+public class Client2 {
     private static final String SERVER_IP = "localhost";
     private static final int SERVER_PORT = 8888;
 
@@ -92,7 +92,6 @@ public class Client1 {
         signupButton.setFont(new Font("SimSun", Font.BOLD, 14));
         loginButton = new JButton("登录");
         loginButton.setFont(new Font("SimSun", Font.BOLD, 14));
-
         buttonPanel.add(signupButton);
         buttonPanel.add(loginButton);
 

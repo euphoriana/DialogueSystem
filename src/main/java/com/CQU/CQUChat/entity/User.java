@@ -1,4 +1,4 @@
-package com.mq.myqq.entity;
+package com.CQU.CQUChat.entity;
 
 public class User {
     private String nickname;
