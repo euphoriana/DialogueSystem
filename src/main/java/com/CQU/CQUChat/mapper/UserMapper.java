@@ -1,7 +1,7 @@
-package com.mq.myqq.mapper;
+package com.CQU.CQUChat.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mq.myqq.entity.User;
+import com.CQU.CQUChat.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
