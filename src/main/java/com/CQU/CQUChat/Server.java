@@ -19,7 +19,7 @@ public class Server {
 
     public static void startServer() {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            System.out.println("MyQQ> Server is running on port: " + PORT);
+            System.out.println("CQUChat> Server is running on port: " + PORT);
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
@@ -39,14 +39,14 @@ public class Server {
             clientName = reader.readLine();
             if (clientName != null) {
                 clientWriters.put(clientName, writer);
-                System.out.println("MyQQ> New client connected: " + clientName);
+                System.out.println("CQUChat> New client connected: " + clientName);
                 // 发送当前客户端列表给新客户端
                 sendClientList();
             }
 
             String message;
             while ((message = reader.readLine()) != null) {
-                System.out.println("MyQQ> receive message: " + message);
+                System.out.println("CQUChat> receive message: " + message);
                 // 处理收到的消息
                 if (message.startsWith("/openChatRoom")) {
                     // Format: /createGroup groupName member1 member2 ...
@@ -59,7 +59,7 @@ public class Server {
             }
 
         } catch (IOException e) {
-            System.out.println("MyQQ> Client disconnected: " + clientName);
+            System.out.println("CQUChat> Client disconnected: " + clientName);
         } finally {
             if (clientName != null) {
                 // 移除已断开连接的客户端
@@ -69,7 +69,7 @@ public class Server {
             try {
                 clientSocket.close();
             } catch (IOException e) {
-                System.out.println("MyQQ> Error closing socket: " + e.getMessage());
+                System.out.println("CQUChat> Error closing socket: " + e.getMessage());
             }
         }
     }
@@ -98,7 +98,7 @@ public class Server {
             }
         } else {
             // 处理parts数组元素不足的情况
-            System.err.println("MyQQ> 无效的文件传输命令: " + command);
+            System.err.println("CQUChat> 无效的文件传输命令: " + command);
         }
     }
 
@@ -153,7 +153,7 @@ public class Server {
         List<String> members = new ArrayList<>();
         for (int i = 2; i < parts.length; i++) {
             members.add(parts[i]);
-            System.out.println("MyQQ> new chatRoom member: " + parts[i]);
+            System.out.println("CQUChat> new chatRoom member: " + parts[i]);
         }
 
         groupMembers.put(groupName, members);
